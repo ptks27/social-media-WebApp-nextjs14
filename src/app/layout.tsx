@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import "stream-chat-react/dist/css/v2/index.css";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "@/components/ui/toaster";
@@ -30,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${kanitThinItalic.variable} ${kanitRegular.variable}`}>
         <NextSSRPlugin routerConfig={extractRouterConfig(fileRouter)}/>
         <ReactQueryProvider>

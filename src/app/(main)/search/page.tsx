@@ -1,18 +1,19 @@
 import TrendsSidebar from "@/components/TrendsSidebar";
-import Bookmarks from "../bookmarks/Bookmarks";
 import SearchResults from "./SearchResults";
 
 interface PageProps {
-  searchParams: { q: string };
+  searchParams: Promise<{ q: string }>;
 }
 
-export function generateMetadata({ searchParams: { q } }: PageProps) {
+export async function generateMetadata({ searchParams }: PageProps) {
+  const { q } = await searchParams;
   return {
     title: `ค้นหา "${q}"`,
   };
 }
 
-export default function Page({ searchParams: { q } }: PageProps) {
+export default async function Page({ searchParams }: PageProps) {
+  const { q } = await searchParams;
   return (
     <main className="flex w-full min-w-0 gap-5">
       <div className="w-full min-w-0 space-y-5">

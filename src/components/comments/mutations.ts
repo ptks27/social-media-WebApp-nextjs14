@@ -7,7 +7,7 @@ import {
 import { useToast } from "../ui/use-toast";
 import { deleteComment, submitComment } from "./action";
 import { CommentData, CommentsPage } from "@/lib/types";
-import { pages } from "next/dist/build/templates/app-page";
+
 
 export function useSubmitCommentMutation(postId: string) {
   const { toast } = useToast();

@@ -1,12 +1,13 @@
 import { validateRequest } from "@/auth";
 import prisma from "@/lib/prisma";
-import { BookmarkInfo, LikeInfo } from "@/lib/types";
+import { BookmarkInfo } from "@/lib/types";
 
 export async function GET(
   req: Request,
-  { params: { postId } }: { params: { postId: string } },
+  { params }: { params: Promise<{ postId: string }> },
 ) {
   try {
+    const { postId } = await params;
     const { user: loggedInUser } = await validateRequest();
 
     if (!loggedInUser) {
@@ -14,17 +15,17 @@ export async function GET(
     }
 
     const bookmark = await prisma.bookmark.findUnique({
-        where: {
-            userId_postId: {
-                userId: loggedInUser.id,
-                postId
-            }
-        }
-    })
+      where: {
+        userId_postId: {
+          userId: loggedInUser.id,
+          postId,
+        },
+      },
+    });
 
     const data: BookmarkInfo = {
-        isBookmarkedByUser: !!bookmark,
-    }
+      isBookmarkedByUser: !!bookmark,
+    };
 
     return Response.json(data);
   } catch (error) {
@@ -35,9 +36,10 @@ export async function GET(
 
 export async function POST(
   req: Request,
-  { params: { postId } }: { params: { postId: string } },
+  { params }: { params: Promise<{ postId: string }> },
 ) {
   try {
+    const { postId } = await params;
     const { user: loggedInUser } = await validateRequest();
 
     if (!loggedInUser) {
@@ -67,9 +69,10 @@ export async function POST(
 
 export async function DELETE(
   req: Request,
-  { params: { postId } }: { params: { postId: string } },
+  { params }: { params: Promise<{ postId: string }> },
 ) {
   try {
+    const { postId } = await params;
     const { user: loggedInUser } = await validateRequest();
 
     if (!loggedInUser) {

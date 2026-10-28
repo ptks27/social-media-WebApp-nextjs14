@@ -4,13 +4,14 @@ import { cn } from "@/lib/utils";
 import { NotificationType } from "@prisma/client";
 import { Heart, MessageCircle, User2 } from "lucide-react";
 import Link from "next/link";
+import React from "react";
 
 interface notificationProps {
     notification: NotificationData;
 }
 
 export default function Notification({notification}: notificationProps) {
-    const notificationTypeMap: Record<NotificationType, {message: string, icon: JSX.Element, href: string}> = {
+    const notificationTypeMap: Record<NotificationType, {message: string, icon: React.ReactNode, href: string}> = {
         FOLLOW: {
             message: `${notification.issuer.displayName} ได้ติดตามคุณ`,
             icon: <User2 className="size-7 text-primary"/>,
@@ -36,9 +37,7 @@ export default function Notification({notification}: notificationProps) {
                 "flex gap-3 rounded-2xl bg-card p-5 shadow-sm transition-colors hover:bg-card/70",
                 !notification.read && "bg-primary/10"
             )}>
-                <div className="my-1">
-                    {icon}
-                </div>
+                <div className="my-1">{icon}</div>
                 <div className="space-y-3">
                     <UserAvatar avatarUrl={notification.issuer.avatarUrl} size={36}/>
                     <div>

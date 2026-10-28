@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import prisma from "@/lib/prisma";
 import { Bell, Bookmark, Home, Mail, MessageCircle, MessageCircleMore } from "lucide-react";
 import Link from "next/link";
-import NotificationsButton from "./์NotificationsButton";
+import NotificationsButton from "./NotificationsButton";
 import MessagesButton from "./MessagesButton";
 import streamServerClient from "@/lib/stream";
 
